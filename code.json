@@ -19,7 +19,7 @@
     "disclaimerURL": "hhtps://github.com/DOI-NPS/NPSdatastore/blob/main/LICENSE",
     "repositoryURL": "https://github.com/DOI-NPS/NPSdatastore",
     "vcs": "git",
-    "laborHours": 600,
+    "laborHours": 650,
     "tags": [
       "NRSS",
       "IMD",
@@ -32,11 +32,11 @@
       "R"
     ],
     "contact": {
-      "name": "Sarah Wright",
-      "email": "sarah_wright@nps.gov"
+      "name": "Robert Baker",
+      "email": "robert_baker@nps.gov"
     },
     "date": {
-      "metadataLastUpdated": "2026-06-24
+      "metadataLastUpdated": "2026-11-16
     }
   }
 ]
