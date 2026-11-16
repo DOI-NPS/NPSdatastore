@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # NPSdatastore
@@ -16,7 +15,7 @@ access for authorized NPS users only).
 The NPS DataStore is organized into references, which may contain
 digital files, URLs to external resources, or information about how to
 locate physical resources that cannot be easily digitized (e.g. museum
-item, herbarium samples). Every reference also contains metadata, such
+item, herbarium specimen). Every reference also contains metadata, such
 as a description of its contents and information about its author(s).
 
 There are two special types of references, called *Programs* and
@@ -47,11 +46,18 @@ You can install the development version of NPSdatastore from
 pak::pak("doi-nps/NPSdatastore")
 ```
 
+If you run into errors using the pak package, try:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("doi-nps/NPSdatastore")
+```
+
 ## Examples
 
 ### Search for references by their ID
 
-Every reference in DataStore has a unique identifer, known as a
+Every reference in DataStore has a unique identifier, known as a
 reference ID. In the DataStore web application, these IDs can be found
 at the end of the reference URL, next to the Reference Type, and in the
 “Code” column of any tabular list of references:
@@ -82,7 +88,7 @@ str(head(reference_info, 2), max.level = 2)
 #>   ..$ lifecycle           : chr "Active"
 #>   ..$ newVersion          : NULL
 #>   ..$ masterId            : NULL
-#>   ..$ bibliography        :List of 22
+#>   ..$ bibliography        :List of 26
 #>   ..$ parent              : NULL
 #>   ..$ series              : NULL
 #>   ..$ filesAndLinks       : NULL
@@ -108,7 +114,7 @@ str(head(reference_info, 2), max.level = 2)
 #>   ..$ lifecycle           : chr "Active"
 #>   ..$ newVersion          : NULL
 #>   ..$ masterId            : NULL
-#>   ..$ bibliography        :List of 22
+#>   ..$ bibliography        :List of 26
 #>   ..$ parent              : NULL
 #>   ..$ series              : NULL
 #>   ..$ filesAndLinks       : NULL
@@ -134,15 +140,16 @@ tibble:
 ``` r
 reference_info_basic <- search_references_by_id_basic(reference_ids)
 str(reference_info_basic, strict.width = "cut")
-#> tibble [3 × 18] (S3: tbl_df/tbl/data.frame)
+#> tibble [3 × 19] (S3: tbl_df/tbl/data.frame)
 #>  $ referenceId               : int [1:3] 2171447 2308561 2309935
 #>  $ referenceType             : chr [1:3] "Project" "Program" "Geospatial Data"..
 #>  $ dateOfIssue               : chr [1:3] "2007-09-17T12:00:00Z" "1998-01-01T1"..
 #>  $ lifecycle                 : chr [1:3] "Active" "Active" "Active"
 #>  $ visibility                : chr [1:3] "Public" "Public" "Public"
 #>  $ fileCount                 : int [1:3] 0 0 4
-#>  $ fileAccess                : chr [1:3] "Internal" "Public" "Public"
+#>  $ fileAccess                : chr [1:3] "Public" "Public" "Public"
 #>  $ title                     : chr [1:3] "Geologic Resources Inventory Projec"..
+#>  $ publicationTitle          : logi [1:3] NA NA NA
 #>  $ citation                  : chr [1:3] "Stephanie O'Meara, Colorado State U"..
 #>  $ allContactsDisplayCitation: chr [1:3] "Stephanie O'Meara, Colorado State U"..
 #>  $ referenceUrl              : chr [1:3] " https://irma.nps.gov/DataStore/Ref"..
@@ -151,6 +158,6 @@ str(reference_info_basic, strict.width = "cut")
 #>  $ typeName                  : chr [1:3] "Project" "Program" "Geospatial Data"..
 #>  $ isDOI                     : chr [1:3] "False" "False" "False"
 #>  $ newVersion                : int [1:3] NA NA 2314463
-#>  $ mostRecentVersion         : int [1:3] NA NA 2317984
+#>  $ mostRecentVersion         : int [1:3] NA NA 2321443
 #>  $ productCount              : int [1:3] 0 0 0
 ```
