@@ -58,7 +58,7 @@
 <!-- badges: start -->
 
 <p>The NPS DataStore is the official home of National Park Service (NPS) datasets, publications, and more. Use this package to search the contents of DataStore, download files, and publish new content (write access for authorized NPS users only).</p>
-<p>The NPS DataStore is organized into references, which may contain digital files, URLs to external resources, or information about how to locate physical resources that cannot be easily digitized (e.g. museum item, herbarium samples). Every reference also contains metadata, such as a description of its contents and information about its author(s).</p>
+<p>The NPS DataStore is organized into references, which may contain digital files, URLs to external resources, or information about how to locate physical resources that cannot be easily digitized (e.g. museum item, herbarium specimen). Every reference also contains metadata, such as a description of its contents and information about its author(s).</p>
 <p>There are two special types of references, called <em>Programs</em> and <em>Projects</em>, that only contain other references. Not all references belong to a Program or a Project, but they are a helpful way to organize things.</p>
 <p><em>Project</em> references contain all the references related to - you guessed it - a single project. An example of a Project might be “Amphibian Inventory at Great Smoky Mountains National Park,” and it might contain a reference for the final dataset resulting from the inventory, another reference for the protocol that was used to conduct the inventory, and yet another reference for the published report summarizing the inventory results. A reference can belong to multiple Project references.</p>
 <p><em>Program</em> references contain multiple Project references, and typically represent a group that is working on similar or related projects. “Great Smoky Mountains National Park Resource Management Team” is an example of a Program that might contain the example Project described above.</p>
@@ -69,6 +69,10 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pak/man/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"doi-nps/NPSdatastore"</span><span class="op">)</span></span></code></pre></div>
+<p>If you run into errors using the pak package, try:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"doi-nps/NPSdatastore"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -76,9 +80,9 @@
 <div class="section level3">
 <h3 id="search-for-references-by-their-id">Search for references by their ID<a class="anchor" aria-label="anchor" href="#search-for-references-by-their-id"></a>
 </h3>
-<p>Every reference in DataStore has a unique identifer, known as a reference ID. In the DataStore web application, these IDs can be found at the end of the reference URL, next to the Reference Type, and in the “Code” column of any tabular list of references:</p>
+<p>Every reference in DataStore has a unique identifier, known as a reference ID. In the DataStore web application, these IDs can be found at the end of the reference URL, next to the Reference Type, and in the “Code” column of any tabular list of references:</p>
 <p><img src="reference/figures/ref_id_locations.png" alt="screenshot of a DataStore reference with arrows pointing to the locations, described above, where the reference ID can be found"> If you know the reference IDs of the references you are interested in, you can use <code><a href="reference/search_references_by_id.html">search_references_by_id()</a></code> to retrieve detailed information about them. This returns a nested list whose names are the reference IDs. If <code><a href="reference/search_references_by_id.html">search_references_by_id()</a></code> isn’t able to locate some references, it will throw a warning. If it isn’t able to locate any references, it will throw an error.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://doi-nps.github.io/NPSdatastore/">NPSdatastore</a></span><span class="op">)</span></span>
 <span><span class="va">reference_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2308561</span>,  <span class="co"># This is a Program reference</span></span>
 <span>                   <span class="fl">2171447</span>,  <span class="co"># This is a Project reference</span></span>
@@ -94,7 +98,7 @@
 <span><span class="co">#&gt;   ..$ lifecycle           : chr "Active"</span></span>
 <span><span class="co">#&gt;   ..$ newVersion          : NULL</span></span>
 <span><span class="co">#&gt;   ..$ masterId            : NULL</span></span>
-<span><span class="co">#&gt;   ..$ bibliography        :List of 22</span></span>
+<span><span class="co">#&gt;   ..$ bibliography        :List of 26</span></span>
 <span><span class="co">#&gt;   ..$ parent              : NULL</span></span>
 <span><span class="co">#&gt;   ..$ series              : NULL</span></span>
 <span><span class="co">#&gt;   ..$ filesAndLinks       : NULL</span></span>
@@ -120,7 +124,7 @@
 <span><span class="co">#&gt;   ..$ lifecycle           : chr "Active"</span></span>
 <span><span class="co">#&gt;   ..$ newVersion          : NULL</span></span>
 <span><span class="co">#&gt;   ..$ masterId            : NULL</span></span>
-<span><span class="co">#&gt;   ..$ bibliography        :List of 22</span></span>
+<span><span class="co">#&gt;   ..$ bibliography        :List of 26</span></span>
 <span><span class="co">#&gt;   ..$ parent              : NULL</span></span>
 <span><span class="co">#&gt;   ..$ series              : NULL</span></span>
 <span><span class="co">#&gt;   ..$ filesAndLinks       : NULL</span></span>
@@ -139,18 +143,19 @@
 <span><span class="co">#&gt;   ..$ contentProducerUnits: tibble [1 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;   ..$ programs            : NULL</span></span></code></pre></div>
 <p>If that’s overkill, you can get just the basic information as a single tibble:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reference_info_basic</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/search_references_by_id_basic.html">search_references_by_id_basic</a></span><span class="op">(</span><span class="va">reference_ids</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">reference_info_basic</span>, strict.width <span class="op">=</span> <span class="st">"cut"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [3 × 18] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [3 × 19] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ referenceId               : int [1:3] 2171447 2308561 2309935</span></span>
 <span><span class="co">#&gt;  $ referenceType             : chr [1:3] "Project" "Program" "Geospatial Data"..</span></span>
 <span><span class="co">#&gt;  $ dateOfIssue               : chr [1:3] "2007-09-17T12:00:00Z" "1998-01-01T1"..</span></span>
 <span><span class="co">#&gt;  $ lifecycle                 : chr [1:3] "Active" "Active" "Active"</span></span>
 <span><span class="co">#&gt;  $ visibility                : chr [1:3] "Public" "Public" "Public"</span></span>
 <span><span class="co">#&gt;  $ fileCount                 : int [1:3] 0 0 4</span></span>
-<span><span class="co">#&gt;  $ fileAccess                : chr [1:3] "Internal" "Public" "Public"</span></span>
+<span><span class="co">#&gt;  $ fileAccess                : chr [1:3] "Public" "Public" "Public"</span></span>
 <span><span class="co">#&gt;  $ title                     : chr [1:3] "Geologic Resources Inventory Projec"..</span></span>
+<span><span class="co">#&gt;  $ publicationTitle          : logi [1:3] NA NA NA</span></span>
 <span><span class="co">#&gt;  $ citation                  : chr [1:3] "Stephanie O'Meara, Colorado State U"..</span></span>
 <span><span class="co">#&gt;  $ allContactsDisplayCitation: chr [1:3] "Stephanie O'Meara, Colorado State U"..</span></span>
 <span><span class="co">#&gt;  $ referenceUrl              : chr [1:3] " https://irma.nps.gov/DataStore/Ref"..</span></span>
@@ -159,7 +164,7 @@
 <span><span class="co">#&gt;  $ typeName                  : chr [1:3] "Project" "Program" "Geospatial Data"..</span></span>
 <span><span class="co">#&gt;  $ isDOI                     : chr [1:3] "False" "False" "False"</span></span>
 <span><span class="co">#&gt;  $ newVersion                : int [1:3] NA NA 2314463</span></span>
-<span><span class="co">#&gt;  $ mostRecentVersion         : int [1:3] NA NA 2317984</span></span>
+<span><span class="co">#&gt;  $ mostRecentVersion         : int [1:3] NA NA 2321443</span></span>
 <span><span class="co">#&gt;  $ productCount              : int [1:3] 0 0 0</span></span></code></pre></div>
 </div>
 </div>
@@ -197,8 +202,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Sarah E. Wright <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0009-0004-5060-2189" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li><a href="authors.html">More about authors...</a></li>
+<li>Robert L. Baker <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7591-5035" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Sarah E. Wright <br><small class="roles"> Author </small> <a href="https://orcid.org/0009-0004-5060-2189" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -214,7 +219,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Sarah E. Wright.</p>
+  <p>Developed by Robert L. Baker, Sarah E. Wright.</p>
 </div>
 
 <div class="pkgdown-footer-right">

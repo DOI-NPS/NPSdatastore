@@ -1,5 +1,7 @@
 ---
-output: github_document
+output: 
+  md_document:
+    variant: markdown_github
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -21,7 +23,7 @@ knitr::opts_chunk$set(
 
 The NPS DataStore is the official home of National Park Service (NPS) datasets, publications, and more. Use this package to search the contents of DataStore, download files, and publish new content (write access for authorized NPS users only).
 
-The NPS DataStore is organized into references, which may contain digital files, URLs to external resources, or information about how to locate physical resources that cannot be easily digitized (e.g. museum item, herbarium samples). Every reference also contains metadata, such as a description of its contents and information about its author(s).
+The NPS DataStore is organized into references, which may contain digital files, URLs to external resources, or information about how to locate physical resources that cannot be easily digitized (e.g. museum item, herbarium specimen). Every reference also contains metadata, such as a description of its contents and information about its author(s).
 
 There are two special types of references, called *Programs* and *Projects*, that only contain other references. Not all references belong to a Program or a Project, but they are a helpful way to organize things.
 
@@ -38,11 +40,18 @@ You can install the development version of NPSdatastore from [GitHub](https://gi
 pak::pak("doi-nps/NPSdatastore")
 ```
 
+If you run into errors using the pak package, try:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("doi-nps/NPSdatastore")
+```
+
 ## Examples
 
 ### Search for references by their ID
 
-Every reference in DataStore has a unique identifer, known as a reference ID. In the DataStore web application,
+Every reference in DataStore has a unique identifier, known as a reference ID. In the DataStore web application,
 these IDs can be found at the end of the reference URL, next to the Reference Type, and in the "Code" column of any
 tabular list of references:
 
